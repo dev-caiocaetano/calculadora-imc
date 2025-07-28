@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Calculadora IMC</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans:ital,wght@0,300..800;1,300..800&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="./assets/css/style.css">
+</head>
+
+<body>
+
+    <section class="container">
+        <h1>Tabela IMC</h1>
+        </div>
+        <form class="form" action="" method="get">
+            <div class="linha">
+                <label class="label" for="input-nome">Nome:</label>
+                <input type="text" class="inputs" id="input-nome">
+            </div>
+            <div class="linha">
+                <label class="label" for="input-peso">Peso:</label>
+                <input type="number" class="inputs" id="input-peso" placeholder="kg" min="0">
+            </div>
+            <div class="linha">
+                <label class="label" for="input-altura">Altura:</label>
+                <input type="number" class="inputs" id="input-altura" placeholder="cm" min="0">
+            </div>
+
+            <button class="botao">Calcular IMC</button>
+        </form>
+    </section>
+    <section class="container__resultado">
+        <div class="resultado"></div>
+    </section>
+    <section class="container__explicacao">
+        <div class="explicacao"></div>
+    </section>
+    <script src="./assets/js/main.js"></script>
+</body>
+
+</html>

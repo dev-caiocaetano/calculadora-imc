@@ -1,0 +1,118 @@
+:root {
+    --fonte-principal: "Open Sans", sans-serif;
+    --cor-de-fundo: #1a1f2e;
+    --cor-input: #1a1f2e;
+    --cor-calculadora: #222838;
+    --cor-botao: #3096f3;
+    --cor-botao-hover: #0b7fec;
+    --cor-resultado: #30d5df;
+    --cor-textos: #FFFFFF;
+}
+
+* {
+    box-sizing: border-box;
+    outline: 0;
+}
+
+body {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--cor-de-fundo);
+    margin: 0;
+    padding: 0;
+    font-family: var(--fonte-principal);
+}
+
+h1 {
+    color: var(--cor-textos);
+    margin-bottom: 20px;
+}
+
+.container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    background: var(--cor-calculadora);
+    box-shadow: 10px 10px 10px rgba(0, 0, 0, 0.5); 
+    border-radius: 15px;
+    width: 15em;
+    height: 19em;
+    padding: 10px 30px;
+    margin-top: 30px;
+}
+
+.form {
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+}
+
+.linha {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 10px;
+}
+
+.label {
+    color: var(--cor-textos);
+    font-family: var(--fonte-principal);
+    width: 80px;
+    text-align: left;
+}
+
+.inputs {
+    background: var(--cor-input);
+    color: var(--cor-textos);
+    border: none;
+    border-radius: 10px;
+    height: 30px;
+    text-align: right;
+    padding-right: 10px;
+}
+
+#input-nome {
+    width: 8em;
+}
+
+#input-peso, #input-altura {
+    width: 4em;
+}
+
+.botao {
+    font-family: var(--fonte-principal);
+    font-size: 18px;
+    background: var(--cor-botao);
+    color: var(--cor-textos);
+    border: none;
+    border-radius: 10px;
+    margin-top: 10px;
+    height: 50px;
+    cursor: pointer;
+}
+
+.botao:hover {
+    background: var(--cor-botao-hover);
+}
+
+.resultado {
+    margin-top: 40px;
+    color: var(--cor-resultado);
+    font-family: var(--fonte-principal);
+    text-align: center;
+    font-size: 22px;
+}
+
+.explicacao {
+    margin: 40px;
+    color: var(--cor-resultado);
+    font-family: var(--fonte-principal);
+    text-align: center;
+}
+
+input[type=number]::-webkit-inner-spin-button, 
+input[type=number]::-webkit-outer-spin-button { 
+  -webkit-appearance: none; 
+  margin: 0; 
+}
