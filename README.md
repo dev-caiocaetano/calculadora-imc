@@ -1,6 +1,6 @@
 ## ⚠️ Observações
 
-Este projeto tem fins exclusivamente didáticos e não deve ser utilizado para diagnósticos médicos.
+Este projeto tem fins exclusivamente didáticos e **NÃO DEVE SER UTILIZADO PARA DIAGNÓSTICOS MÉDICOS**.
 
 # 💪 Calculadora de IMC
 
