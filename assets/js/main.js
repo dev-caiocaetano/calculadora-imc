@@ -1,9 +1,9 @@
-function calculoImc() {
-    const formulario = document.querySelector('.form');
-    const resultado = document.querySelector('.resultado');
-    const explicacao = document.querySelector('.explicacao');
+function bmiCalculator() {
+    const form = document.querySelector('.form');
+    const result = document.querySelector('.resultado');
+    const explanation = document.querySelector('.explicacao');
 
-    const textoExplicacao = `
+    const explanationText = `
     <h3>
         O que é o IMC?
     </h3>
@@ -38,46 +38,63 @@ function calculoImc() {
         <strong>Acima de 40:</strong> Obesidade grau III (mórbida).<br> Risco muito alto para saúde.<br>
     </p>`;
 
-    function recebeDados(evento) {
+    function receiveData(evento) {
         evento.preventDefault();
 
-        const nomeUsuario = formulario.querySelector('#input-nome').value.trim() || "Olá";
-        const pesoEmQuilos = Number(formulario.querySelector('#input-peso').value);
-        let alturaEmCentimetros = Number(formulario.querySelector('#input-altura').value);
-        alturaEmCentimetros = alturaEmCentimetros / 100;
-        const indiceMassaCorporal = (pesoEmQuilos / (alturaEmCentimetros ** 2)).toFixed(2);
+        const userName = form.querySelector('#input-nome').value.trim() || "Olá";
+        const weight = Number(form.querySelector('#input-peso').value);
+        let height = Number(form.querySelector('#input-altura').value);
 
-        if ((isNaN(pesoEmQuilos) || pesoEmQuilos <= 0) && (isNaN(alturaEmCentimetros) || alturaEmCentimetros <= 0)) {
-            resultado.innerHTML = `${nomeUsuario}, seu peso e altura são inválidos, revise os campos!`;
+        const validateMessage = (validateInputs(weight, height, userName));
+    
+        if (validateMessage) {
+            result.innerHTML = validateMessage;
             return;
-        }
-        if (!alturaEmCentimetros || alturaEmCentimetros <= 0) {
-            resultado.innerHTML = `${nomeUsuario}, sua altura é inválida, revise o campo!`;
-            return;
-        }
-        if (!pesoEmQuilos || pesoEmQuilos <= 0) {
-            resultado.innerHTML = `${nomeUsuario}, seu peso é inválido, revise o campo!`;
-            return;
-        }
+        }  
 
-        if (indiceMassaCorporal < 18.5) {
-            resultado.innerHTML = `<strong>${nomeUsuario}, seu IMC é ${indiceMassaCorporal}.<br> Você está abaixo do peso ideal.`;
-        } else if (indiceMassaCorporal < 25) {
-            resultado.innerHTML = `<strong>${nomeUsuario}, seu IMC é ${indiceMassaCorporal}.<br><br> Você está no peso ideal.`;
-        } else if (indiceMassaCorporal < 29.9) {
-            resultado.innerHTML = `<strong>${nomeUsuario}, seu IMC é ${indiceMassaCorporal}.<br> Você está com sobrepeso.`;
-        } else if (indiceMassaCorporal < 34.9) {
-            resultado.innerHTML = `<strong>${nomeUsuario}, seu IMC é ${indiceMassaCorporal}.<br> Você está com Obesidade grau I.`;
-        } else if (indiceMassaCorporal < 39.9) {
-            resultado.innerHTML = `<strong>${nomeUsuario}, seu IMC é ${indiceMassaCorporal}.<br> Você está com Obesidade grau II.`;
-        } else {
-            resultado.innerHTML = `<strong>${nomeUsuario}, seu IMC é ${indiceMassaCorporal}.<br> Você está com Obesidade grau III (Mórbida).`;
-        }
+        const bmi = calculateBMI(weight, height);
+        const levelBmi = classifyBmi(bmi);
+        const message = resultMessage(userName, bmi, levelBmi);
 
-        explicacao.innerHTML = textoExplicacao;
+        result.innerHTML = message;
+        explanation.innerHTML = explanationText;
     }
 
-    formulario.addEventListener('submit', recebeDados);
+    function validateInputs(weight, height, name) {
+        if ((isNaN(weight) || weight <= 0) && (isNaN(height) || height <= 0)) {
+            return `${name}, seu peso e altura são inválidos, revise os campos!`;
+        };
+        if (!height || height <= 0) {
+            return `${name}, sua altura é inválida, revise o campo!`;
+        };
+        if (!weight || weight <= 0) {
+            return `${name}, seu peso é inválido, revise o campo!`;
+        };
+    };
+
+    function calculateBMI(weight, height) {
+        const bodyMassIndex = (weight / ((height / 100) ** 2)).toFixed(2);
+        return bodyMassIndex;
+    };
+
+    function classifyBmi(value) {
+        const bmiLevels = [
+            { level: 'Obesidade grau III (mórbida)', min: 40 },
+            { level: 'Obesidade grau II', min: 35 },
+            { level: 'Obesidade grau I', min: 30 },
+            { level: 'Sobrepeso', min: 25 },
+            { level: 'Peso normal', min: 18.5 },
+            { level: 'Abaixo do peso', min: 0 }
+        ];
+        const foundBmi = bmiLevels.find((level) => level.min <= value);
+        return foundBmi.level;
+    };
+
+    function resultMessage(name, bmi, level) {
+        return `<strong>${name}, seu IMC é ${bmi} - ${level}`
+    };
+
+    form.addEventListener('submit', receiveData);
 }
 
-calculoImc();
+bmiCalculator();
